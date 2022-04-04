@@ -161,5 +161,3 @@ export default function ForgotPassword() {
     </>
   );
 }
-git config user.name // Check your user name
-git config user.email
