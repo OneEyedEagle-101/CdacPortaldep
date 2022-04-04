@@ -17,3 +17,9 @@ export function Quiz() {
 export function Profileinfo() {
   return <StudentDashboard />;
 }
+export function NoticeB() {
+  return <StudentDashboard />;
+}
+export function StudyMaterial() {
+  return <StudentDashboard />;
+}

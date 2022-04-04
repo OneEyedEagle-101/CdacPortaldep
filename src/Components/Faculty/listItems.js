@@ -42,7 +42,15 @@ export const mainListItems = (
         <ListItemText primary="Broadcast Notice" />
       </ListItemButton>
     </Link>
-    <Link to="/Faculty/UploadNotes">
+    <Link to="/Faculty/UploadRecording">
+      <ListItemButton>
+        <ListItemIcon>
+          <NotesIcon />
+        </ListItemIcon>
+        <ListItemText primary="Study Material" />
+      </ListItemButton>
+    </Link>
+    <Link to="/Faculty/UploadRecording">
       <ListItemButton>
         <ListItemIcon>
           <NotesIcon />

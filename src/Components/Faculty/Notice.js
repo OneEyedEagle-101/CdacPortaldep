@@ -54,7 +54,9 @@ export default function Notice() {
           <Row>
             <Col style={{ marginLeft: "50px", fontWeight: "bolder" }}>
               <Form.Group className="mb-3" controlId="formBasicNotice">
-                <Form.Label>Subject </Form.Label>
+                <div className="pt-3">
+                  <Form.Label>Subject </Form.Label>
+                </div>
                 <Form.Control
                   id="subject"
                   type="text"

@@ -18,10 +18,12 @@ export default function Cards() {
   }, []);
   const startQuiz = async (e) => {
     {
+      console.log(e.target.value);
       let questionList = await axios.get(
         "http://localhost:8080/Student/getQuestionList?id=" + e.target.value
       );
       let questionList1 = questionList.data;
+      console.log(questionList1);
       let question = {
         queList: questionList1,
         queCount: 0,

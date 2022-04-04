@@ -18,12 +18,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./Chart";
+
 import { Fab } from "@mui/material";
 
-import Orders from "./Orders";
-import ChartTwo from "./ChartTwo";
-import ChartThree from "./ChartThree";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import AddQuiz from "./AddQuiz";
@@ -31,6 +28,10 @@ import AddQuestion from "./AddQuestion";
 import StudyMaterial from "../Student/StudyMaterial";
 import { ResponsiveContainer } from "recharts";
 import Notice from "./Notice";
+import FacultyRecordingUpload from "./FacultyRecordingUploadTest";
+import axios from "axios";
+import FacultyRecording from "./FacultyRecordingUpload";
+import { Title } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -86,6 +87,12 @@ function DashboardContent() {
     month: "short",
     day: "numeric",
   });
+
+  let [countRecording, setCountRecording] = React.useState(0);
+  let [countNote, setCountNote] = React.useState(0);
+  let [countNotice, setCountNotice] = React.useState(0);
+  let [countQuiz, setCountQuiz] = React.useState(0);
+
   var time = new Date().toLocaleTimeString();
   var [ctime, setCtime] = React.useState(time);
   const UpdateTime = () => {
@@ -102,11 +109,24 @@ function DashboardContent() {
 
   let user = sessionStorage.getItem("user");
   let id;
-  React.useEffect(() => {
+  React.useEffect(async () => {
     if (user === "null" || user === null || user === undefined) {
       toast.error("Login First!!");
       navigate("/");
     }
+    const resp1 = await axios.get(
+      "http://localhost:8080/Faculty/dashboard?portalId=" +
+        JSON.parse(sessionStorage.getItem("user")).portalId
+    );
+    const dashcontent = resp1.data;
+    countQuiz = resp1.data.countQuiz;
+    setCountQuiz(countQuiz);
+    countNote = resp1.data.countNote;
+    setCountNote(countNote);
+    countNotice = resp1.data.countNotice;
+    setCountNote(countNotice);
+    countRecording = resp1.data.countRecording;
+    setCountRecording(countRecording);
   }, []);
 
   if (user !== "null" && user !== null && user !== undefined) {
@@ -153,12 +173,10 @@ function DashboardContent() {
               >
                 Faculty Dashboard
               </Typography>
-              <img
-                src="https://ci4.googleusercontent.com/proxy/mta1h-3IY-hDdJj9bN6Xxr94NMwPShHjLGCpVtITeh4FONiEryzXYSNYP_LzrMwHQ3_cb2nMIgqmiU5CP19fa1Sy2j0KZMxl0M0waLHaKN98tADGF1qfHtzGANmMCpK0XTl3WFf0yhABxLFC4cg4CeU=s0-d-e1-ft#https://i.ibb.co/Z6qL3Qk/130835957-4769194336484775-8630394154285450578-n-removebg-preview.png"
-                alt="Kitten"
-                height="65"
-                width="45"
-              />
+              <div className="px-2">
+                {user.name}
+                <span className="px-3">{user.role}</span>
+              </div>
             </Toolbar>
           </AppBar>
 
@@ -195,53 +213,85 @@ function DashboardContent() {
             }}
           >
             <Toolbar />
-
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Grid>
                 {location.pathname == "/Faculty" ? (
-                  <Grid container spacing={3}>
-                    {/* Chart */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <Chart />
-                      </Paper>
-                    </Grid>
-                    {/* Chart 2 */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <ChartTwo />
-                      </Paper>
-                    </Grid>
-                    {/* Chart 3 */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <ChartThree />
-                      </Paper>
-                    </Grid>
+                  <>
+                    <div className="display-5 pb-2 text-dark">
+                      Your Activity
+                    </div>
 
-                    {/* Recent Orders */}
-                  </Grid>
+                    <Grid container spacing={3}>
+                      {/* Chart */}
+                      <Grid item xs={12} md={4} lg={3}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 240,
+                          }}
+                        >
+                          <div className="display-6 fw-bold text-center">
+                            <div>Quizzes Uploaded</div>
+                            <div>{countQuiz}</div>
+                          </div>
+                        </Paper>
+                      </Grid>
+                      {/* Chart 2 */}
+                      <Grid item xs={12} md={4} lg={3}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 240,
+                          }}
+                        >
+                          <div className="display-6 fw-bold text-center">
+                            <div>Recordings Uploaded</div>
+                            <div>{countRecording}</div>
+                          </div>
+                        </Paper>
+                      </Grid>
+                      {/* Chart 3 */}
+                      <Grid item xs={12} md={4} lg={3}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 240,
+                          }}
+                        >
+                          <div className="display-6 fw-bold text-center">
+                            <div>Notes Uploaded</div>
+                            <div>{countNotice}</div>
+                          </div>
+                        </Paper>
+                      </Grid>
+
+                      {/* Recent Orders */}
+
+                      <Grid item xs={12} md={4} lg={3}>
+                        <Paper
+                          sx={{
+                            p: 2,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: 240,
+                          }}
+                        >
+                          <div className="display-6 fw-bold text-center">
+                            <div>Notice Posted</div>
+                            <div>{countNote}</div>
+                          </div>
+                        </Paper>
+                      </Grid>
+
+                      {/* Recent Orders */}
+                    </Grid>
+                  </>
                 ) : location.pathname == "/Faculty/CreateQuiz" ? (
                   <AddQuiz />
                 ) : location.pathname == "/Faculty/AddQuestion" ? (
@@ -254,6 +304,10 @@ function DashboardContent() {
                   <StudyMaterial />
                 ) : location.pathname == "/Faculty/Notice" ? (
                   <Notice />
+                ) : location.pathname == "/Faculty/UploadRecording" ? (
+                  <div>
+                    <FacultyRecording />
+                  </div>
                 ) : (
                   navigate("/Faculty")
                 )}

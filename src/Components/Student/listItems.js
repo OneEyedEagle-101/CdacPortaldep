@@ -48,14 +48,7 @@ export const mainListItems = (
         <ListItemText primary="Quiz" />
       </ListItemButton>
     </Link>
-    <Link to="/Student/Notes">
-      <ListItemButton>
-        <ListItemIcon>
-          <SpeakerNotesIcon />
-        </ListItemIcon>
-        <ListItemText primary="Notes" />
-      </ListItemButton>
-    </Link>
+
     <Link to="/Student/Notice">
       <ListItemButton>
         <ListItemIcon>
@@ -64,18 +57,20 @@ export const mainListItems = (
         <ListItemText primary="Notice" />
       </ListItemButton>
     </Link>
-    <ListItemButton>
-      <ListItemIcon>
-        <TextSnippetIcon />
-      </ListItemIcon>
-      <ListItemText primary="Study Material" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <EmergencyRecordingIcon />
-      </ListItemIcon>
-      <ListItemText primary=" Recordings" />
-    </ListItemButton>
+    <Link to="/Student/StudyMaterial">
+      <ListItemButton>
+        <ListItemIcon>
+          <TextSnippetIcon />
+        </ListItemIcon>
+        <ListItemText primary="Study Material" />
+      </ListItemButton>
+      <ListItemButton>
+        <ListItemIcon>
+          <EmergencyRecordingIcon />
+        </ListItemIcon>
+        <ListItemText primary=" Recordings" />
+      </ListItemButton>
+    </Link>
     <Link to="/">
       <ListItemButton
         onClick={() => {

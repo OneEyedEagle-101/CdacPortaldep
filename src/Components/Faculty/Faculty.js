@@ -15,3 +15,6 @@ export function AddNotes() {
 export function SendNotice() {
   return <FacultyDashboard />;
 }
+export function SendRecording() {
+  return <FacultyDashboard />;
+}

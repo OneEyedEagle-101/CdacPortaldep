@@ -17,7 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
-
+import { SocialIcon } from "react-social-icons";
 import DispChart from "./DispChart";
 import { useLocation, useNavigate } from "react-router-dom";
 import Login from "../Login";
@@ -29,6 +29,9 @@ import { Avatar } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
 import Webcam from "react-webcam";
 import { useEffect, useState } from "react";
+import ProfileCard from "./ProfileCard";
+import NoticeBoard from "./NoticBoard";
+import StudentStudyMaterial from "./StudentStudyMaterial";
 function Copyright(props) {
   return (
     <Typography
@@ -110,7 +113,7 @@ function DashboardContent() {
   setInterval(UpdateTime, 1000);
 
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -172,12 +175,7 @@ function DashboardContent() {
             >
               Student Dashboard
             </Typography>
-            <img
-              alt={user.name}
-              src={"http://localhost:8080/getpropic?id=" + id}
-              height="65"
-              width="45"
-            />
+
             {/* <Avatar
               
               
@@ -240,20 +238,27 @@ function DashboardContent() {
                       }}
                     >
                       {" "}
-                      <div className="display-6 text-center pb-2">Score Table</div>
+                      <div className="display-6 text-center pb-2">
+                        Score Table
+                      </div>
                       <DispChart />
+                      <ProfileCard idus={id} name={user.name} />
                     </Paper>
                   </>
                 ) : location.pathname === "/Student/QuizList" ? (
                   <Cards />
                 ) : location.pathname === "/Student/Quiz" ? (
-                  <StartQuiz />
+                  <>
+                    <StartQuiz />
+                  </>
                 ) : location.pathname === "/Student/Profile" ? (
                   <Profile />
                 ) : location.pathname === "/Student/Notice" ? (
-                  <Notice />
+                  <NoticeBoard />
+                ) : location.pathname === "/Student/StudyMaterial" ? (
+                  <StudentStudyMaterial />
                 ) : (
-                  <DispChart />
+                  navigate("/")
                 )}
               </Grid>
               {/* <div className="px-4 pt-4" style={{ display: "flex" }}>
@@ -298,8 +303,6 @@ function DashboardContent() {
           </Container>
         </Box>
       </Box>
-
-      <Copyright sx={{ pt: 4 }} />
 
       <Toaster position="top-center" reverseOrder={false} />
     </ThemeProvider>

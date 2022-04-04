@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { RadioGroup } from "react-radio-buttons";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,10 +20,11 @@ export default function StartQuiz() {
   let [question, setQuestion] = useState("");
   let [quesCount, setCount] = useState(0);
   let [option, setOption] = useState([]);
+  let [quizid, setQuizId] = useState(0);
   let navigate = useNavigate();
   let user = sessionStorage.getItem("user");
   let quiz = JSON.parse(sessionStorage.getItem("quiz"));
-  let quizid;
+  console.log(quiz);
   const lengthofquiz = quiz.queList.length;
   let score = 0;
   const location = useLocation();
@@ -32,6 +34,7 @@ export default function StartQuiz() {
       navigate("/");
     }
     quizid = quiz.queList[0].quizId;
+    setQuizId(quizid);
     question = quiz.queList[quesCount].question;
     option = quiz.queList[quesCount].options;
 
@@ -93,66 +96,93 @@ export default function StartQuiz() {
 
   return (
     <>
-      <AppBar position="absolute">
-        <Toolbar
-          sx={{
-            pr: "24px", // keep right padding when drawer closed
-          }}
-        >
-          <img
-            src="https://ci4.googleusercontent.com/proxy/mta1h-3IY-hDdJj9bN6Xxr94NMwPShHjLGCpVtITeh4FONiEryzXYSNYP_LzrMwHQ3_cb2nMIgqmiU5CP19fa1Sy2j0KZMxl0M0waLHaKN98tADGF1qfHtzGANmMCpK0XTl3WFf0yhABxLFC4cg4CeU=s0-d-e1-ft#https://i.ibb.co/Z6qL3Qk/130835957-4769194336484775-8630394154285450578-n-removebg-preview.png"
-            alt="Kitten"
-            height="65"
-            width="45"
-          />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
+      <Grid align="center">
+        <Row>
+          <Paper
+            elevation={10}
+            style={{ height: "80vh", width: "800px", marginTop: "17px" }}
           >
-            Student Dashboard
-          </Typography>
-          <img
-            alt={user.name}
-            src={"http://localhost:8080/getpropic?id=" + user.portalId}
-            height="65"
-            width="45"
-          />
-          {/* <Avatar
-              
-              
-            /> */}
-        </Toolbar>
-      </AppBar>
-      <div className="mt-4"></div>
-      <Grid container justify="space-even">
-        <Grid item xs={8}>
-          <div className="text-muted">
-            Question No.
-            {quesCount + 1} of {lengthofquiz}
-            <h1 className="display-1">{question}</h1>
-          </div>
-          {option.map((item, i) => (
-            <h1>
-              <label for={i}>
-                <input
-                  id={i}
-                  type="radio"
-                  value={item.correct}
-                  name="option"
-                  required
-                />
-                {item.optionString}
-              </label>
-            </h1>
-          ))}
-          <Button onClick={submitAnswer}>Submit Answer</Button>
-        </Grid>
-        <Grid item xs={4}>
-          <Webcam height={"50%"} width={"50%"} />
-        </Grid>
+            <div
+              className="text-muted "
+              style={{ font: "5px", marginLeft: "30px", marginBottom: "40px" }}
+            >
+              <div>
+                <div
+                  className="pt-2"
+                  style={{
+                    fontSize: "20px",
+                    color: "blue",
+                    fontWeight: "bolder",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {" "}
+                  Question No. {quesCount + 1} of {lengthofquiz}
+                </div>
+
+                <div
+                  className="display-1"
+                  style={{
+                    fontSize: "20px",
+                    overflowWrap: "break-word",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {question}
+                </div>
+              </div>
+            </div>
+            {option.map((item, i) => (
+              <h1 style={{ marginBottom: "30px", marginLeft: "30px" }}>
+                <label for={i}>
+                  <Row>
+                    <Col>
+                      <label for={i}>
+                        <input
+                          id={i}
+                          type="radio"
+                          value={item.correct}
+                          name="option"
+                          required
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            marginTop: "9px",
+                          }}
+                        />
+                      </label>
+                    </Col>
+                    <Col>
+                      <Form>
+                        <Form.Group className="mb-3">
+                          <textarea
+                            className="rounded-4 px-2"
+                            value={item.optionString}
+                            style={{ width: "45vw" }}
+                            disabled
+                          />
+                        </Form.Group>
+                      </Form>
+                    </Col>
+                  </Row>
+                </label>
+              </h1>
+            ))}
+            <Grid align="right">
+              <Button
+                variant="contained"
+                style={{ marginRight: "70px" }}
+                onClick={submitAnswer}
+              >
+                Submit Answer
+              </Button>
+            </Grid>
+            <Toaster position="top-center" reverseOrder={false} />
+          </Paper>
+          <Col className="pt-3 ">
+            <Webcam className="rounded-2" sx={{ height: 398, width: 400 }} />
+          </Col>
+        </Row>
       </Grid>
 
       <Toaster position="top-center" reverseOrder={false} />

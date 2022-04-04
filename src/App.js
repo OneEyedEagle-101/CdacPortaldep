@@ -4,11 +4,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StudentDashboard from "./Components/Student/StudentDashboard";
 import FacultyDashboard from "./Components/Faculty/FacultyDashboard";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
-import ForgetPassword from "./Components/ForgetPassword";
+import ForgotPassword from "./Components/ForgotPassword";
 import Register from "./Components/Register";
-import QuizList from "./Components/Student/QuizList";
-import { Quiz, Profileinfo } from "./Components/Student/QuizList";
-import CreateQuiz, { SendNotice } from "./Components/Faculty/Faculty";
+import QuizList, { NoticeB } from "./Components/Student/QuizList";
+import {
+  Quiz,
+  Profileinfo,
+  StudyMaterial,
+} from "./Components/Student/QuizList";
+import CreateQuiz, {
+  SendNotice,
+  SendRecording,
+} from "./Components/Faculty/Faculty";
 import { AddQuestions, AddNotes } from "./Components/Faculty/Faculty";
 
 function App() {
@@ -18,7 +25,7 @@ function App() {
       <Route element={<StudentDashboard />} path="/Student" />
       <Route element={<FacultyDashboard />} path="/Faculty" />
       <Route element={<AdminDashboard />} path="/Admin" />
-      <Route element={<ForgetPassword />} path="/ForgetPassword" />
+      <Route element={<ForgotPassword />} path="/ForgetPassword" />
       <Route element={<AddQuestions />} path="/Faculty/AddQuestion" />
       <Route element={<CreateQuiz />} path="Faculty/CreateQuiz" />
       <Route element={<Register />} path="/Register" />
@@ -26,6 +33,9 @@ function App() {
       <Route element={<Quiz />} path="/Student/Quiz" />
       <Route element={<Profileinfo />} path="/Student/Profile" />
       <Route element={<SendNotice />} path="/Faculty/Notice" />
+      <Route element={<SendRecording />} path="/Faculty/UploadRecording" />
+      <Route element={<NoticeB />} path="/Student/Notice" />
+      <Route element={<StudyMaterial />} path="/Student/StudyMaterial" />
     </Routes>
   );
 }
