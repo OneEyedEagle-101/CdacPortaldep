@@ -13,19 +13,20 @@ import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Link, Navigate, useLocation } from "react-router-dom";
-
+import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./Chart";
+import { mainListItems } from "./listItems";
 
-import Orders from "./Orders";
+import { useLocation, useNavigate } from "react-router-dom";
+import FacultyList from "./FacultyList";
+import StudentsList from "./StudentsList";
+import Chart from "./Chart";
 import ChartTwo from "./ChartTwo";
+
 import ChartFour from "./ChartFour";
-import ChartThree from "./ChartThree";
-import { FacultyList, StudentList } from "./Admin";
+import toast from "react-hot-toast";
 
 const drawerWidth = 240;
 
@@ -76,9 +77,28 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  let location = useLocation();
-  console.log(location.pathname);
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  ////////////////////////////////////
+  let id;
+  let user = sessionStorage.getItem("user");
+  React.useEffect(() => {
+    if (user === "null" || user === null || user === undefined) {
+      toast.error("Login First!!");
+      navigate("/");
+    }
+  }, []);
+
+  if (user !== "null" && user !== null && user !== undefined) {
+    user = JSON.parse(sessionStorage.getItem("user"));
+
+    id = user.portalId;
+  }
+
+  /////////////////////////////////////
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -108,7 +128,7 @@ function DashboardContent() {
             <img
               src="https://ci4.googleusercontent.com/proxy/mta1h-3IY-hDdJj9bN6Xxr94NMwPShHjLGCpVtITeh4FONiEryzXYSNYP_LzrMwHQ3_cb2nMIgqmiU5CP19fa1Sy2j0KZMxl0M0waLHaKN98tADGF1qfHtzGANmMCpK0XTl3WFf0yhABxLFC4cg4CeU=s0-d-e1-ft#https://i.ibb.co/Z6qL3Qk/130835957-4769194336484775-8630394154285450578-n-removebg-preview.png"
               alt="Kitten"
-              height="65"
+              height="45"
               width="45"
             />
             <Typography
@@ -139,7 +159,6 @@ function DashboardContent() {
           <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
         <Box
@@ -156,94 +175,62 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
+            <Grid>
               {location.pathname == "/Admin" ? (
-                <>
-                  <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 240,
-                      }}
-                    >
-                      <Chart />
-                    </Paper>
-                  </Grid>
+                <div>
+                  <Grid container spacing={3}>
+                    {/* Chart */}
+                    <Grid item xs={12} md={4} lg={3}>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          display: "flex",
+                          flexDirection: "column",
+                          height: 240,
+                        }}
+                      >
+                        <Chart />
+                      </Paper>
+                    </Grid>
+                    {/* Chart 2 */}
+                    <Grid item xs={12} md={4} lg={3}>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          display: "flex",
+                          flexDirection: "column",
+                          height: 240,
+                        }}
+                      >
+                        <ChartTwo />
+                      </Paper>
+                    </Grid>
+                    {/* Chart 3 */}
+                    <Grid item xs={12} md={4} lg={3}>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          display: "flex",
+                          flexDirection: "column",
+                          height: 240,
+                        }}
+                      >
+                        <ChartFour />
+                      </Paper>
+                    </Grid>
 
-                  {/* Chart 2*/}
-                  <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 240,
-                      }}
-                    >
-                      <ChartTwo />
-                    </Paper>
+                    {/* Recent Orders */}
                   </Grid>
-
-                  {/* Chart 2*/}
-                  <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 240,
-                      }}
-                    >
-                      <ChartTwo />
-                    </Paper>
-                  </Grid>
-                  {/* Chart 3*/}
-                  <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 240,
-                      }}
-                    >
-                      <ChartThree />
-                    </Paper>
-                  </Grid>
-
-                  {/* Chart 4*/}
-                  <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 240,
-                      }}
-                    >
-                      <ChartFour />
-                    </Paper>
-                  </Grid>
-                </>
-              ) : location.pathname === "/Admin" ? (
-                <AdminDashboard />
-              ) : location.pathname === "/Admin/FacultyList" ? (
-                <>
-                  <FacultyList />
-                </>
-              ) : location.pathname === "/Admin/StudentList" ? (
-                <>
-                  <StudentList />
-                </>
+                </div>
+              ) : location.pathname == "/Admin/StudentRecords" ? (
+                <StudentsList />
+              ) : location.pathname == "/Admin/FacultyRecords" ? (
+                <FacultyList />
               ) : (
-                Navigate("/")
+                navigate("/AdminDashboard")
               )}
-
-              {/* Recent Orders */}
             </Grid>
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

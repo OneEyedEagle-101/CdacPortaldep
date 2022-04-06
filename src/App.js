@@ -21,6 +21,10 @@ import CreateQuiz, {
   SendStudyMaterial,
 } from "./Components/Faculty/Faculty";
 import { AddQuestions, AddNotes } from "./Components/Faculty/Faculty";
+import AdminPath, {
+  FacultyRecords,
+  StudentRecords,
+} from "./Components/Admin/AdminPath";
 
 function App() {
   return (
@@ -28,7 +32,6 @@ function App() {
       <Route element={<Login />} path="/"></Route>
       <Route element={<StudentDashboard />} path="/Student" />
       <Route element={<FacultyDashboard />} path="/Faculty" />
-      <Route element={<AdminDashboard />} path="/Admin" />
       <Route element={<ForgotPassword />} path="/ForgetPassword" />
       <Route element={<AddQuestions />} path="/Faculty/AddQuestion" />
       <Route element={<CreateQuiz />} path="Faculty/CreateQuiz" />
@@ -40,8 +43,10 @@ function App() {
       <Route element={<SendRecording />} path="/Faculty/UploadRecording" />
       <Route element={<NoticeB />} path="/Student/Notice" />
       <Route element={<StudyMaterial />} path="/Student/StudyMaterial" />
-      <Route element={<RecordingsView />} path="/Student/viewRecordings" />
-      <Route element={<SendStudyMaterial />} path="/Faculty/StudyMaterial" />
+      <Route path="/Admin/StudentRecords" element={<StudentRecords />} />
+      <Route path="Faculty/StudyMaterial" element={<SendStudyMaterial/>}/>
+      <Route path="/Admin/FacultyRecords" element={<FacultyRecords />} />
+      <Route element={<AdminDashboard />} path="/Admin" />
     </Routes>
   );
 }

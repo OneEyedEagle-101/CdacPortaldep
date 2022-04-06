@@ -9,12 +9,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotesIcon from "@mui/icons-material/Notes";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import { Link } from "react-router-dom";
+
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 
 export const mainListItems = (
   <React.Fragment>
@@ -26,66 +27,34 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
       </ListItemButton>
     </Link>
-    <Link to="/Admin/FacultyList">
+    <Link to="/Admin/FacultyRecords">
       <ListItemButton>
         <ListItemIcon>
-          <AutoAwesomeMotionIcon />
+          <SupervisorAccountIcon />
         </ListItemIcon>
-        <ListItemText primary="Faculty Records " />
+        <ListItemText primary="Faculty Records" />
       </ListItemButton>
     </Link>
-    <Link to="/Admin/StudentList">
-      <ListItemButton>
-        <ListItemIcon>
-          <AccountCircleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Students Records" />
-      </ListItemButton>
-    </Link>
-    <Link to="/Admin/ManageList">
+    <Link to="/Admin/StudentRecords">
       <ListItemButton>
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>
-        <ListItemText primary="Manage Records" />
+        <ListItemText primary="Student Records" />
       </ListItemButton>
     </Link>
-    <ListItemButton
-    // onClick={() => {
-    //   sessionStorage.setItem("user", null);
-    //   localStorage.setItem("user", null);
-    // }}
-    >
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
-    </ListItemButton>
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    {/* <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton> */}
+    <Link to="/">
+      <ListItemButton
+        onClick={() => {
+          sessionStorage.setItem("user", null);
+          localStorage.setItem("user", null);
+        }}
+      >
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <ListItemText primary="Logout" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );
