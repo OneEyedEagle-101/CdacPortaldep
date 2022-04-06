@@ -43,7 +43,6 @@ export default function FacultyRecording() {
     await axios.post("http://localhost:8080/Faculty/AddRec", {
       body: {
         moduleName,
-        date: "91,03,21",
         recordingLink,
         topicName,
         id,

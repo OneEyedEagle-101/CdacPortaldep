@@ -30,6 +30,7 @@ export default function DispChart() {
       //
     );
     response = resp.data;
+    console.log(response);
     setData(response);
   }, []);
 
@@ -45,11 +46,12 @@ export default function DispChart() {
         }}
       >
         <XAxis
-          dataKey="time"
+          dataKey="name"
           stroke={theme.palette.text.secondary}
           style={theme.typography.body2}
         />
         <YAxis
+          dataKey="score"
           stroke={theme.palette.text.secondary}
           style={theme.typography.body2}
         ></YAxis>
@@ -77,13 +79,13 @@ export default function DispChart() {
         </Label>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name"></XAxis>
-        <YAxis dataKey="score" />
+        <YAxis />
         <Tooltip />
-        <Legend />
+
         <Line
           type="monotone"
           dataKey="score"
-          stroke={theme.palette.primary.main}
+          stroke="#8884d8" activeDot={{ r: 8 }}
           activeDot={{ r: 8 }}
         />
       </LineChart>

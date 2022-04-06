@@ -18,6 +18,7 @@ import {
 import CreateQuiz, {
   SendNotice,
   SendRecording,
+  SendStudyMaterial,
 } from "./Components/Faculty/Faculty";
 import { AddQuestions, AddNotes } from "./Components/Faculty/Faculty";
 
@@ -40,6 +41,7 @@ function App() {
       <Route element={<NoticeB />} path="/Student/Notice" />
       <Route element={<StudyMaterial />} path="/Student/StudyMaterial" />
       <Route element={<RecordingsView />} path="/Student/viewRecordings" />
+      <Route element={<SendStudyMaterial />} path="/Faculty/StudyMaterial" />
     </Routes>
   );
 }

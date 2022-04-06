@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import RecordingsUpload from "./Components/Faculty/RecordingsUpload";
 import StreamMongo from "./StreamMongo";
 import Checkrecordings from "./Components/Student/Checkrecordings";
+import TabTest from "./Components/Faculty/TabTest";
 
 ReactDOM.render(
   <BrowserRouter>

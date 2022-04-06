@@ -50,7 +50,7 @@ export const mainListItems = (
         <ListItemText primary="Upload Recordings" />
       </ListItemButton>
     </Link>
-    <Link to="/Faculty/UploadRecording">
+    <Link to="/Faculty/StudyMaterial">
       <ListItemButton>
         <ListItemIcon>
           <NotesIcon />

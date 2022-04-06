@@ -33,6 +33,7 @@ import axios from "axios";
 import FacultyRecording from "./FacultyRecordingUpload";
 import { Title } from "@mui/icons-material";
 import RecordingsUpload from "./RecordingsUpload";
+import TabTest from "./TabTest";
 
 const drawerWidth = 240;
 
@@ -353,6 +354,8 @@ function DashboardContent() {
                   <div>
                     <RecordingsUpload />
                   </div>
+                ) : location.pathname == "/Faculty/StudyMaterial" ? (
+                  <TabTest />
                 ) : (
                   navigate("/Faculty")
                 )}

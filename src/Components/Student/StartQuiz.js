@@ -21,12 +21,13 @@ export default function StartQuiz() {
   let [quesCount, setCount] = useState(0);
   let [option, setOption] = useState([]);
   let [quizid, setQuizId] = useState(0);
+  let [score, setScore] = useState(0);
   let navigate = useNavigate();
   let user = sessionStorage.getItem("user");
   let quiz = JSON.parse(sessionStorage.getItem("quiz"));
   console.log(quiz);
   const lengthofquiz = quiz.queList.length;
-  let score = 0;
+  
   const location = useLocation();
   useEffect(() => {
     if (user === "null" || user === null) {
@@ -52,6 +53,8 @@ export default function StartQuiz() {
     if (quesCount >= lengthofquiz) {
       toast.success("quiz ended");
       updateDB();
+      score=0;
+      setScore(score);
       navigate("/Student");
       return;
     }
@@ -68,7 +71,7 @@ export default function StartQuiz() {
   };
   const updateDB = async () => {
     let userid = user.portalId;
-    console.log("***********************************" + userid);
+  
     await axios.post("http://localhost:8080/Student/AddScore", null, {
       params: {
         userid,
@@ -81,9 +84,14 @@ export default function StartQuiz() {
   const scoreCounter = () => {
     for (let i = 0; i < 4; i++) {
       if (document.getElementById(i).checked) {
+        
         quesCount = quesCount + 1;
         if (document.getElementById(i).value == "true") {
-          score = score + 1;
+          
+            score = score + 1;
+            setScore(score);
+           
+
         }
 
         document.getElementById(i).checked = false;
