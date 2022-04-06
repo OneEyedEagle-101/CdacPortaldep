@@ -46,7 +46,7 @@ export default function StudentStudyMaterial() {
       <Grid align="center">
         <Paper
           elevation={10}
-          style={{ width: "90vw", height: "500px", margin: "20px" }}
+          style={{ width: "70vw", height: "500px", margin: "20px" }}
         >
           <Table striped bordered hover>
             <thead>

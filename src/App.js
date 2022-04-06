@@ -43,6 +43,7 @@ function App() {
       <Route element={<SendRecording />} path="/Faculty/UploadRecording" />
       <Route element={<NoticeB />} path="/Student/Notice" />
       <Route element={<StudyMaterial />} path="/Student/StudyMaterial" />
+      <Route path="/Student/viewRecordings" element={<RecordingsView />} />
       <Route path="/Admin/StudentRecords" element={<StudentRecords />} />
       <Route path="Faculty/StudyMaterial" element={<SendStudyMaterial/>}/>
       <Route path="/Admin/FacultyRecords" element={<FacultyRecords />} />
