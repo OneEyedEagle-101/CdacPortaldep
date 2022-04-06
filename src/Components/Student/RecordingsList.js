@@ -90,13 +90,13 @@ export default function RecordingsList() {
               </tr>
             </thead>
             <tbody>
-              {recordList.map((item, i) => (
+              {recordList.map((item,i) => (
                 <tr>
-                  <td>{item[1].moduleName}</td>
-                  <td>{item[1].uploadDate}</td>
-                  <td>{item[1].topicName}</td>
+                  <td>{item[i].moduleName}</td>
+                  <td>{item[i].uploadDate}</td>
+                  <td>{item[i].topicName}</td>
                   <td>
-                    <Button value={item[1].objectId} onClick={handleOpen}>
+                    <Button value={item[i].objectId} onClick={handleOpen}>
                       Open modal
                     </Button>
                     <Modal
@@ -110,9 +110,9 @@ export default function RecordingsList() {
                           className="display-6 text-center"
                           id="parent-modal-description"
                         >
-                          Topic Name {item[1].moduleName}
+                          Topic Name {item[i].moduleName}
                         </p>
-                        <ChildModal videoId={item[1].objectId} />
+                        <ChildModal videoId={item[i].objectId} />
                       </Box>
                     </Modal>
                   </td>
