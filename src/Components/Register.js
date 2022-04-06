@@ -147,7 +147,7 @@ export default function Register() {
           </Avatar>
           <h3 style={{ color: "#1bbd7e" }}> Sign Up </h3>
         </Grid>
-        <DropdownButton
+        <DropdownButton className="text-dark"
           id="dropdown-variants-Info"
           title="Role"
           onSelect={roleHandler}

@@ -69,9 +69,11 @@ export default function ForgotPassword() {
 
   const updatePassword = async () => {
     let newPassword = document.getElementById("newPassword").value;
+    email = document.getElementById("email").value;
     console.log(newPassword);
+    console.log(email);
     let resp = await axios.post("http://localhost:8080/updatePassword", null, {
-      params: { email, newPassword },
+      params: { newPassword, email },
     });
     if (resp.data) {
       toast.success("Password updated successfully, Please relogin");

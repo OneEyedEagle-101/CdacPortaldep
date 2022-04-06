@@ -47,6 +47,7 @@ export default function RecordingsUpload() {
         },
       }
     );
+    
     if (resp.data) {
       toast.success("Video Uploaded Successfullly");
       return;
