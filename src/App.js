@@ -1,11 +1,11 @@
 import Login from "./Components/Login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import StudentDashboard from "./Components/Student/StudentDashboard";
 import FacultyDashboard from "./Components/Faculty/FacultyDashboard";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import ForgotPassword from "./Components/ForgotPassword";
 import Register from "./Components/Register";
-import "./App.css"
+import "./App.css";
 import QuizList, {
   NoticeB,
   QuizEnd,
@@ -28,6 +28,7 @@ import AdminPath, {
 } from "./Components/Admin/AdminPath";
 
 function App() {
+  let navigate = useNavigate();
   return (
     <Routes>
       <Route element={<Login />} path="/"></Route>
@@ -50,6 +51,7 @@ function App() {
       <Route path="/Admin/FacultyRecords" element={<FacultyRecords />} />
       <Route element={<AdminDashboard />} path="/Admin" />
       <Route path="/Student/Congratulations" element={<QuizEnd />} />
+      <Route path="*" element={<Login />} />
     </Routes>
   );
 }

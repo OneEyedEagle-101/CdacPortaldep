@@ -17,7 +17,7 @@ import axios from "axios";
 
 import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { DropdownButton} from "react-bootstrap";
+import { DropdownButton } from "react-bootstrap";
 import { Dropdown } from "bootstrap";
 import { MenuItem } from "@material-ui/core";
 
@@ -76,7 +76,7 @@ export default function Register() {
   const roleHandler = (e) => {
     console.log(e);
 
-    setRole(e);
+    setRole(e.target.value);
   };
 
   function clearField() {
@@ -193,18 +193,18 @@ export default function Register() {
             <h3 style={{ color: "#1bbd7e" }}> Sign Up </h3>
           </Grid>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-label">Role</InputLabel>
-          <Select
-          width="400px"
-            labelId="demo-simple-select-label"
-            className="text-dark"
-            id="dropdown-variants-Info"
-            title="Role"
-            onSelect={roleHandler}
-          >
-            <MenuItem eventKey="faculty">Faculty</MenuItem>
-            <MenuItem eventKey="student">Student</MenuItem>
-          </Select>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <Select
+              width="400px"
+              labelId="demo-simple-select-label"
+              className="text-dark"
+              id="dropdown-variants-Info"
+              title="Role"
+              onSelect={roleHandler}
+            >
+              <MenuItem eventKey="faculty">Faculty</MenuItem>
+              <MenuItem eventKey="student">Student</MenuItem>
+            </Select>
           </FormControl>
           <TextField
             id="name"
@@ -267,7 +267,6 @@ export default function Register() {
               <b className="text-info"> Sign in</b>
             </Link>
           </Typography>
-        
         </Paper>
       </Grid>
     </>
