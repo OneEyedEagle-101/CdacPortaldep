@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import { Table } from "react-bootstrap";
+import { Row, Table } from "react-bootstrap";
 import { Grid } from "@mui/material";
 import axios from "axios";
 
@@ -20,106 +20,91 @@ const style = {
   pb: 3,
 };
 
-function ChildModal(props) {
-  const [open, setOpen] = React.useState(false);
-  let [videoId, setId] = React.useState("");
-
-  const handleOpen = () => {
-    setId(props.videoId);
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  console.log(props.videoId);
-  return (
-    <React.Fragment>
-      <Button className="text-center" onClick={handleOpen}>
-        Click to Play Recording
-      </Button>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 700, radius: 10 }}>
-          <video
-            src={`http://localhost:8080/Student/videoView?id=` + videoId}
-            controls
-            width="400"
-          ></video>
-          <Button onClick={handleClose}>Close Video</Button>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
-
 export default function RecordingsList() {
   const [open, setOpen] = React.useState(false);
-  let [recordList, setRecordList] = React.useState([]);
-
   const handleOpen = (e) => {
+    console.log(e.target.value);
+    setVidId(e.target.value);
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
+  let [recordList, setRecordList] = React.useState([]);
+  let [vidId, setVidId] = React.useState("");
+
   React.useEffect(async () => {
     let response = await axios.get("http://localhost:8080/Student/VideoList");
+    setRecordList(response.data);
     console.log(response.data);
-    let record = response.data;
-    recordList = [...recordList, record];
-    setRecordList(recordList);
   }, []);
-  console.log(recordList);
-  console.log("*********************************");
+
   return (
     <>
-      <Grid container spacing={4} justifyContent="right">
+      <div className="display-6 fw-bolder text-center  mb-4">
+        Recordings Section
+      </div>
+      <Grid container spacing={4} justifyContent="center">
         <Grid item>
-          <Table striped bordered hover style={{ width: "500px" }}>
+          <Table striped bordered hover style={{ width: "500px" }} align="center">
             <thead>
               <tr>
                 <th>Subject</th>
+
+                <th>Document</th>
                 <th>Date</th>
-                <th>Topic</th>
                 <th>Videos</th>
               </tr>
             </thead>
             <tbody>
-              {recordList.map((item,i) => (
-                <tr>
-                  <td>{item[i].moduleName}</td>
-                  <td>{item[i].uploadDate}</td>
-                  <td>{item[i].topicName}</td>
-                  <td>
-                    <Button value={item[i].objectId} onClick={handleOpen}>
-                      Open modal
-                    </Button>
+              {recordList.map((item, i) => (
+                <>
+                  <tr>
+                    <td>{item.moduleName}</td>
+                    <td>{item.topicName}</td>
+                    <td>{item.uploadDate}</td>
+
+                    <td>
+                      <Button value={item.objectId} onClick={handleOpen}>
+                        Play recording
+                      </Button>
+                    </td>
                     <Modal
                       open={open}
                       onClose={handleClose}
-                      aria-labelledby="parent-modal-title"
-                      aria-describedby="parent-modal-description"
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
                     >
-                      <Box sx={{ ...style, width: 400 }}>
-                        <p
-                          className="display-6 text-center"
-                          id="parent-modal-description"
-                        >
-                          Topic Name {item[i].moduleName}
-                        </p>
-                        <ChildModal videoId={item[i].objectId} />
+                      <Box sx={style}>
+                        <video
+                          src={
+                            `http://localhost:8080/Student/videoView?id=` +
+                            vidId
+                          }
+                          controls
+                          height="20"
+                          width="400"
+                        ></video>
                       </Box>
                     </Modal>
-                  </td>
-                </tr>
+                  </tr>
+                </>
               ))}
             </tbody>
           </Table>
+          {/* <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+            {recordList.map((item, i) => (
+              <div >
+                <video
+                  src={
+                    `http://localhost:8080/Student/videoView?id=` +
+                    item.objectId
+                  }
+                  controls
+                height="20"
+                  width="400"
+                ></video>
+              </div>
+            ))}
+          </Row> */}
         </Grid>
       </Grid>
     </>

@@ -9,18 +9,13 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
-
-import { Fab } from "@mui/material";
-
+import { mainListItems } from "./listItems";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import AddQuiz from "./AddQuiz";
@@ -28,12 +23,10 @@ import AddQuestion from "./AddQuestion";
 import StudyMaterial from "../Student/StudyMaterial";
 import { ResponsiveContainer } from "recharts";
 import Notice from "./Notice";
-import FacultyRecordingUpload from "./FacultyRecordingUploadTest";
 import axios from "axios";
-import FacultyRecording from "./FacultyRecordingUpload";
-import { Title } from "@mui/icons-material";
 import RecordingsUpload from "./RecordingsUpload";
 import TabTest from "./TabTest";
+import ApexPieChart from "./ApexPieChart";
 
 const drawerWidth = 240;
 
@@ -133,7 +126,7 @@ function DashboardContent() {
     countNote = resp1.data.countNote;
     setCountNote(countNote);
     countNotice = resp1.data.countNotice;
-    setCountNote(countNotice);
+    setCountNotice(countNotice);
     countRecording = resp1.data.countRecording;
     setCountRecording(countRecording);
   }, []);
@@ -142,6 +135,9 @@ function DashboardContent() {
     user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
     id = user.portalId;
+  }
+  if (user.role != "faculty") {
+    navigate("/");
   }
 
   return (
@@ -173,19 +169,17 @@ function DashboardContent() {
                 height="65"
                 width="45"
               />
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 5 }}
-              >
-                Faculty Dashboard
-              </Typography>
-              <div className="px-2">
-                {user.name}
-                <span className="px-3">{user.role}</span>
-              </div>
+                <span
+              className="multicolortext fw-bolder ml-3"
+              style={{ fontSize: "35px" }}
+            >
+              CDAC Portal
+            </span>
+            <img
+              height="100"
+              width="100"
+              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+            />
             </Toolbar>
           </AppBar>
 
@@ -203,11 +197,7 @@ function DashboardContent() {
               </IconButton>
             </Toolbar>
             <Divider />
-            <List component="nav">
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
-            </List>
+            <List component="nav">{mainListItems}</List>
           </Drawer>
           <Box
             component="main"
@@ -302,13 +292,11 @@ function DashboardContent() {
                           >
                             <div>Notes Uploaded</div>
                             <div className="pt-4 display-5 fw-bold">
-                              {countNotice}
+                              {countNote}
                             </div>
                           </div>
                         </Paper>
                       </Grid>
-
-                      {/* Recent Orders */}
 
                       <Grid item xs={12} md={4} lg={3}>
                         <Paper
@@ -329,7 +317,7 @@ function DashboardContent() {
                           >
                             <div>Notices Published</div>
                             <div className="pt-4 display-5 fw-bold">
-                              {countNote}
+                              {countNotice}
                             </div>
                           </div>
                         </Paper>
@@ -337,6 +325,7 @@ function DashboardContent() {
 
                       {/* Recent Orders */}
                     </Grid>
+                    <ApexPieChart id={id} />
                   </>
                 ) : location.pathname == "/Faculty/CreateQuiz" ? (
                   <AddQuiz />

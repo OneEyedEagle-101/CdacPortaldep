@@ -1,6 +1,6 @@
-import { Avatar, Grid, Paper } from "@mui/material";
+import { Avatar, Button, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Form, Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -68,6 +68,7 @@ export default function Profile() {
 
   return (
     <>
+      <div className="display-6 fw-bolder">Update Profile</div>
       <Paper elevation={10} style={{ width: "500px", height: "75vh" }}>
         <Grid align="center">
           <img
@@ -138,7 +139,9 @@ export default function Profile() {
               <Form.Group as={Row} className="mb-3">
                 <Col sm={{ span: 20, offset: 2 }}>
                   <Button
+                    variant="contained"
                     style={{ width: "100px" }}
+                    color="success"
                     type="button"
                     onClick={handleEdit}
                   >
@@ -151,6 +154,7 @@ export default function Profile() {
               <Form.Group as={Row} className="mb-3">
                 <Col sm={{ span: 20, offset: 2 }}>
                   <Button
+                    variant="contained"
                     style={{ width: "100px" }}
                     type="button"
                     onClick={handleSave}

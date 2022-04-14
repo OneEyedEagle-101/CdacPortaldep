@@ -48,6 +48,7 @@ export default function AddQuiz() {
   return (
     <>
       <Container component="main" maxWidth="xs">
+        <div className="display-6 fw-bolder text-center">Create Quiz</div>
         <CssBaseline />
         <Box
           sx={{

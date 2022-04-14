@@ -85,7 +85,8 @@ export default function DispChart() {
         <Line
           type="monotone"
           dataKey="score"
-          stroke="#8884d8" activeDot={{ r: 8 }}
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
           activeDot={{ r: 8 }}
         />
       </LineChart>

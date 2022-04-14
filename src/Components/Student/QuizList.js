@@ -26,3 +26,6 @@ export function StudyMaterial() {
 export function RecordingsView() {
   return <StudentDashboard />;
 }
+export function QuizEnd() {
+  return <StudentDashboard />;
+}

@@ -35,50 +35,55 @@ export default function Cards() {
     }
   };
   return (
-    <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-      {subList.map((val) => (
-        <Col>
-          <div style={{ width: "260px" }}>
-            <Card
-              style={{ backgroundColor: "#dff6dd", border: "1px solid grey" }}
-            >
-              <Card.Body>
-                <Card.Text>
-                  <div className="text-center text-dark fw-bold alert-danger rounded-2 p-2">
-                    Quiz No.{val.quizId}
-                  </div>
-                </Card.Text>
+    <>
+      <div className="display-6 fw-bolder text-center alert-success mb-4">
+        Quiz Section
+      </div>
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+        {subList.map((val) => (
+          <Col>
+            <div style={{ width: "260px" }}>
+              <Card
+                style={{ backgroundColor: "#dff6dd", border: "1px solid grey" }}
+              >
+                <Card.Body>
+                  <Card.Text>
+                    <div className="text-center text-dark fw-bold alert-danger rounded-2 p-2">
+                      Quiz No.{val.quizId}
+                    </div>
+                  </Card.Text>
 
-                <Card.Title>
-                  <h2 className="text-center display-xs-6 py-4 fw-bold">
-                    {val.subject}
-                  </h2>
-                </Card.Title>
+                  <Card.Title>
+                    <h2 className="text-center display-xs-6 py-4 fw-bold">
+                      {val.subject}
+                    </h2>
+                  </Card.Title>
 
-                <Card.Text>
-                  <h4 className="">Created by - {val.facname}</h4>
-                </Card.Text>
-                <div className="pt-4"></div>
-                <Button
-                  value={val.quizId}
-                  variant="contained"
-                  onClick={startQuiz}
-                >
-                  Attempt Quiz
-                </Button>
+                  <Card.Text>
+                    <h4 className="">Created by - {val.facname}</h4>
+                  </Card.Text>
+                  <div className="pt-4"></div>
+                  <Button
+                    value={val.quizId}
+                    variant="contained"
+                    onClick={startQuiz}
+                  >
+                    Attempt Quiz
+                  </Button>
 
-                <Card.Text>
-                  <div className="py-2">
-                    <br />
-                    <hr />
-                    <div className="text-muted">Created on - {val.date}</div>
-                  </div>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-        </Col>
-      ))}
-    </Row>
+                  <Card.Text>
+                    <div className="py-2">
+                      <br />
+                      <hr />
+                      <div className="text-muted">Created on - {val.date}</div>
+                    </div>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          </Col>
+        ))}
+      </Row>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { Avatar, Button, Grid, Paper, TextField } from "@mui/material";
 import axios from "axios";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import { Input } from "postcss";
+
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ export default function RecordingsUpload() {
     setDisable(true);
     console.log(file);
     let formdata = new FormData();
+
     formdata.append("videodetails", file);
 
     let resp = await axios.post(
@@ -47,13 +48,14 @@ export default function RecordingsUpload() {
         },
       }
     );
-    
+
     if (resp.data) {
       toast.success("Video Uploaded Successfullly");
       return;
     } else {
       toast.error("Video Error !!");
     }
+    setDisable(false);
   };
   return (
     <Grid align="center">

@@ -9,24 +9,17 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "./listItems";
-
+import ProfileCard from "./ProfileCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import FacultyList from "./FacultyList";
 import StudentsList from "./StudentsList";
-import Chart from "./Chart";
-import ChartTwo from "./ChartTwo";
-
-import ChartFour from "./ChartFour";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import ActivityChart from "./ActivityChart";
 
 const drawerWidth = 240;
 
@@ -89,13 +82,14 @@ function DashboardContent() {
       toast.error("Login First!!");
       navigate("/");
     }
+    if (user !== "null" && user !== null) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+      id = user.portalId;
+      if (user.role !== "admin") {
+        navigate("/");
+      }
+    }
   }, []);
-
-  if (user !== "null" && user !== null && user !== undefined) {
-    user = JSON.parse(sessionStorage.getItem("user"));
-
-    id = user.portalId;
-  }
 
   /////////////////////////////////////
 
@@ -131,15 +125,18 @@ function DashboardContent() {
               height="45"
               width="45"
             />
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 5 }}
+
+            <span
+              className="multicolortext fw-bolder ml-3"
+              style={{ fontSize: "35px" }}
             >
-              Admin Dashboard
-            </Typography>
+              CDAC Portal
+            </span>
+            <img
+              height="100"
+              width="100"
+              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+            />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -178,49 +175,7 @@ function DashboardContent() {
             <Grid>
               {location.pathname == "/Admin" ? (
                 <div>
-                  <Grid container spacing={3}>
-                    {/* Chart */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <Chart />
-                      </Paper>
-                    </Grid>
-                    {/* Chart 2 */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <ChartTwo />
-                      </Paper>
-                    </Grid>
-                    {/* Chart 3 */}
-                    <Grid item xs={12} md={4} lg={3}>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: 240,
-                        }}
-                      >
-                        <ChartFour />
-                      </Paper>
-                    </Grid>
-
-                    {/* Recent Orders */}
-                  </Grid>
+                  <ActivityChart /> <ProfileCard />
                 </div>
               ) : location.pathname == "/Admin/StudentRecords" ? (
                 <StudentsList />
@@ -230,31 +185,12 @@ function DashboardContent() {
                 navigate("/AdminDashboard")
               )}
             </Grid>
-
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
+      <Toaster position="top-center" reverseOrder={false} />
     </ThemeProvider>
   );
-
-  function Copyright(props) {
-    return (
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {"Copyright © "}
-        <Link color="inherit" href="https://www.cdac.in/">
-          CDAC Portal
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
-      </Typography>
-    );
-  }
 }
 
 export default function AdminDashboard() {

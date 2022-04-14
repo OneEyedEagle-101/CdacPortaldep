@@ -16,8 +16,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { BrowserRouter, Link, useNavigate } from "react-router-dom";
 import { Grid, Paper, Avatar } from "@material-ui/core";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Register from "./Register";
-import { color } from "@mui/system";
 
 export default function Login() {
   let [email, setUsername] = useState("");
@@ -36,6 +34,7 @@ export default function Login() {
     console.log(password);
     setPassword(password);
   };
+
   let navigate = useNavigate();
   useEffect(() => {
     console.log(user);
@@ -92,7 +91,6 @@ export default function Login() {
         }
       } else toast.error("Wrong Password");
     } else toast.error("User not Registered, Please Register First");
-    console.log(resp.data);
   }
   const paperStyle = {
     padding: 20,
@@ -117,15 +115,17 @@ export default function Login() {
             height="65"
             width="45"
           />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            CDAC Portal
-          </Typography>
+            <span
+              className="multicolortext fw-bolder ml-3"
+              style={{ fontSize: "35px" }}
+            >
+              CDAC Portal
+            </span>
+            <img
+              height="100"
+              width="100"
+              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+            />
 
           {/* <Avatar
               

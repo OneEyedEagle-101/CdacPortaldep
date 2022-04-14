@@ -8,12 +8,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Form } from "react-bootstrap";
-import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
+import LockResetIcon from "@mui/icons-material/LockReset";
+
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ForgotPassword() {
   let [emaildis, setEmaildis] = useState(false);
@@ -22,6 +22,26 @@ export default function ForgotPassword() {
 
   let navigate = useNavigate();
   let email;
+  let user = sessionStorage.getItem("user");
+  let localstorage = localStorage.getItem("user");
+
+  useEffect(() => {
+    console.log(user);
+    if (localstorage !== "null" && localstorage !== null) {
+      user = sessionStorage.setItem("user", localstorage);
+    }
+    if (user !== "null" && user !== null) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+      if (user.role == "admin") {
+        navigate("/Admin");
+      } else if (user.role == "student") {
+        navigate("/Student");
+      } else if (user.role == "faculty") {
+        navigate("/faculty");
+      } else navigate("/");
+    }
+  });
+
   const getOtp = async () => {
     email = document.getElementById("email").value;
     console.log(email);
@@ -72,8 +92,7 @@ export default function ForgotPassword() {
   const updatePassword = async () => {
     let newPassword = document.getElementById("newPassword").value;
     email = document.getElementById("email").value;
-    console.log(newPassword);
-    console.log(email);
+
     let resp = await axios.post("http://localhost:8080/updatePassword", null, {
       params: { newPassword, email },
     });
@@ -92,7 +111,7 @@ export default function ForgotPassword() {
 
   return (
     <>
-     <AppBar position="fixed">
+      <AppBar position="fixed">
         <Toolbar
           sx={{
             bgcolor: "#1976D2",
@@ -106,20 +125,17 @@ export default function ForgotPassword() {
             height="65"
             width="45"
           />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
+          <span
+            className="multicolortext fw-bolder ml-3"
+            style={{ fontSize: "35px" }}
           >
             CDAC Portal
-          </Typography>
-
-          {/* <Avatar
-              
-              
-            /> */}
+          </span>
+          <img
+            height="100"
+            width="100"
+            src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+          />
         </Toolbar>
       </AppBar>
       <Grid align="center">
@@ -127,8 +143,14 @@ export default function ForgotPassword() {
           elevation={4}
           style={{ width: "450px", height: "70vh", marginTop: "120px" }}
         >
+          <div className="pt-3">
+            <Avatar style={{ background: "#1bbd7e" }}>
+              <LockResetIcon />
+            </Avatar>
+          </div>
           <form>
-            <div className="display-5 pt-3">Reset Password</div>
+            <h4 style={{ color: "#1bbd7e" }}>Reset Password</h4>
+
             <div>
               <TextField
                 className="mt-4 w-75 "
@@ -158,6 +180,7 @@ export default function ForgotPassword() {
             <div>
               <TextField
                 className="mt-4 w-50 "
+                type="password"
                 id="newPassword"
                 label="New Password"
                 disabled={newPassworddis}

@@ -1,4 +1,3 @@
-import "./App.css";
 import Login from "./Components/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StudentDashboard from "./Components/Student/StudentDashboard";
@@ -6,8 +5,10 @@ import FacultyDashboard from "./Components/Faculty/FacultyDashboard";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import ForgotPassword from "./Components/ForgotPassword";
 import Register from "./Components/Register";
+import "./App.css"
 import QuizList, {
   NoticeB,
+  QuizEnd,
   RecordingsView,
 } from "./Components/Student/QuizList";
 import {
@@ -45,9 +46,10 @@ function App() {
       <Route element={<StudyMaterial />} path="/Student/StudyMaterial" />
       <Route path="/Student/viewRecordings" element={<RecordingsView />} />
       <Route path="/Admin/StudentRecords" element={<StudentRecords />} />
-      <Route path="Faculty/StudyMaterial" element={<SendStudyMaterial/>}/>
+      <Route path="Faculty/StudyMaterial" element={<SendStudyMaterial />} />
       <Route path="/Admin/FacultyRecords" element={<FacultyRecords />} />
       <Route element={<AdminDashboard />} path="/Admin" />
+      <Route path="/Student/Congratulations" element={<QuizEnd />} />
     </Routes>
   );
 }

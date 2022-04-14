@@ -8,16 +8,16 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
+
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+
 import { mainListItems, secondaryListItems } from "./listItems";
-import { SocialIcon } from "react-social-icons";
+
 import DispChart from "./DispChart";
 import { useLocation, useNavigate } from "react-router-dom";
 import Login from "../Login";
@@ -33,6 +33,7 @@ import { useEffect, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import NoticeBoard from "./NoticBoard";
 import StudentStudyMaterial from "./StudentStudyMaterial";
+import Congratulations from "./Congratulations";
 function Copyright(props) {
   return (
     <Typography
@@ -130,8 +131,10 @@ function DashboardContent() {
 
   if (user !== "null" && user !== null && user !== undefined) {
     user = JSON.parse(sessionStorage.getItem("user"));
-
     id = user.portalId;
+  }
+  if (user.role != "student") {
+    navigate("/");
   }
   //////////////////
   const theme = {
@@ -167,16 +170,17 @@ function DashboardContent() {
               height="65"
               width="45"
             />
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
+            <span
+              className="multicolortext fw-bolder ml-3"
+              style={{ fontSize: "35px" }}
             >
-              Student Dashboard
-            </Typography>
-
+              CDAC Portal
+            </span>
+            <img
+              height="100"
+              width="100"
+              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+            />
             {/* <Avatar
               
               
@@ -198,11 +202,7 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider />
-            {secondaryListItems}
-          </List>
+          <List component="nav">{mainListItems}</List>
         </Drawer>
 
         <Box
@@ -238,7 +238,6 @@ function DashboardContent() {
                         height: 500,
                       }}
                     >
-                      {" "}
                       <div className="display-6 text-center pb-2">
                         Score Table
                       </div>
@@ -260,6 +259,8 @@ function DashboardContent() {
                   <StudentStudyMaterial />
                 ) : location.pathname == "/Student/viewRecordings" ? (
                   <RecordingsList />
+                ) : location.pathname == "/Student/Congratulations" ? (
+                  <Congratulations />
                 ) : (
                   navigate("/")
                 )}

@@ -58,12 +58,6 @@ export const mainListItems = (
         <ListItemText primary="Study Material" />
       </ListItemButton>
     </Link>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary=" Student Reports" />
-    </ListItemButton>
     <Link to="/">
       <ListItemButton
         onClick={() => {

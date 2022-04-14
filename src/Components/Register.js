@@ -7,6 +7,9 @@ import {
   Typography,
   AppBar,
   Toolbar,
+  Select,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useEffect, useState } from "react";
@@ -14,7 +17,9 @@ import axios from "axios";
 
 import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { DropdownButton} from "react-bootstrap";
+import { Dropdown } from "bootstrap";
+import { MenuItem } from "@material-ui/core";
 
 export default function Register() {
   let [name, setName] = useState("");
@@ -31,8 +36,13 @@ export default function Register() {
   const special = "[!@#$%^&*]";
   let user = sessionStorage.getItem("user");
   let navigate = useNavigate();
+  let localstorage = localStorage.getItem("user");
   useEffect(() => {
-    if (user !== "null") {
+    console.log(user);
+    if (localstorage !== "null" && localstorage !== null) {
+      user = sessionStorage.setItem("user", localstorage);
+    }
+    if (user !== "null" && user !== null) {
       user = JSON.parse(sessionStorage.getItem("user"));
       if (user.role == "admin") {
         navigate("/Admin");
@@ -113,7 +123,7 @@ export default function Register() {
       toast.error("Please enter valid email address");
       return;
     }
-    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
     if (!password.match(passw)) {
       toast.error(
         "password must contain special character and should be between 7-14 characters"
@@ -156,16 +166,17 @@ export default function Register() {
             height="65"
             width="45"
           />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
+          <span
+            className="multicolortext fw-bolder ml-3"
+            style={{ fontSize: "35px" }}
           >
             CDAC Portal
-          </Typography>
-
+          </span>
+          <img
+            height="100"
+            width="100"
+            src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+          />
           {/* <Avatar
               
               
@@ -181,15 +192,20 @@ export default function Register() {
             </Avatar>
             <h3 style={{ color: "#1bbd7e" }}> Sign Up </h3>
           </Grid>
-          <DropdownButton
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-label">Role</InputLabel>
+          <Select
+          width="400px"
+            labelId="demo-simple-select-label"
             className="text-dark"
             id="dropdown-variants-Info"
             title="Role"
             onSelect={roleHandler}
           >
-            <Dropdown.Item eventKey="faculty">Faculty</Dropdown.Item>
-            <Dropdown.Item eventKey="student">Student</Dropdown.Item>
-          </DropdownButton>
+            <MenuItem eventKey="faculty">Faculty</MenuItem>
+            <MenuItem eventKey="student">Student</MenuItem>
+          </Select>
+          </FormControl>
           <TextField
             id="name"
             label="Name"
@@ -251,6 +267,7 @@ export default function Register() {
               <b className="text-info"> Sign in</b>
             </Link>
           </Typography>
+        
         </Paper>
       </Grid>
     </>

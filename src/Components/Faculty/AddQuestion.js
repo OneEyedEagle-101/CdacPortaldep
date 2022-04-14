@@ -1,15 +1,9 @@
-import { TextFields } from "@mui/icons-material";
 import {
   Avatar,
   Box,
   Button,
   Container,
   CssBaseline,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,7 +12,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import CustomToggle from "./CustomToggle";
 import { makeStyles } from "@mui/styles";
 
 export default function AddQuestion() {

@@ -27,7 +27,7 @@ export default function StartQuiz() {
   let quiz = JSON.parse(sessionStorage.getItem("quiz"));
   console.log(quiz);
   const lengthofquiz = quiz.queList.length;
-  
+
   const location = useLocation();
   useEffect(() => {
     if (user === "null" || user === null) {
@@ -53,9 +53,12 @@ export default function StartQuiz() {
     if (quesCount >= lengthofquiz) {
       toast.success("quiz ended");
       updateDB();
-      score=0;
+      sessionStorage.setItem("score", score);
+      score = 0;
       setScore(score);
-      navigate("/Student");
+      
+      sessionStorage.setItem("lengthofquiz", lengthofquiz);
+      navigate("/Student/Congratulations");
       return;
     }
 
@@ -71,7 +74,7 @@ export default function StartQuiz() {
   };
   const updateDB = async () => {
     let userid = user.portalId;
-  
+
     await axios.post("http://localhost:8080/Student/AddScore", null, {
       params: {
         userid,
@@ -84,14 +87,10 @@ export default function StartQuiz() {
   const scoreCounter = () => {
     for (let i = 0; i < 4; i++) {
       if (document.getElementById(i).checked) {
-        
         quesCount = quesCount + 1;
         if (document.getElementById(i).value == "true") {
-          
-            score = score + 1;
-            setScore(score);
-           
-
+          score = score + 1;
+          setScore(score);
         }
 
         document.getElementById(i).checked = false;
