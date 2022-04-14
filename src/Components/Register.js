@@ -157,15 +157,17 @@ export default function Register() {
             height="65"
             width="45"
           />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            CDAC Portal
-          </Typography>
+            <span
+              className="multicolortext fw-bolder ml-3"
+              style={{ fontSize: "35px" }}
+            >
+              CDAC Portal
+            </span>
+            <img
+              height="100"
+              width="100"
+              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+            />
 
           {/* <Avatar
               
@@ -173,6 +175,7 @@ export default function Register() {
             /> */}
         </Toolbar>
       </AppBar>
+
 
       <Grid style={{ marginTop: "100px" }}>
         <Paper elevation={10} style={paperStyle}>
