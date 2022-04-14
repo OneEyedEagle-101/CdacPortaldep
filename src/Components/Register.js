@@ -7,9 +7,6 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  Select,
-  InputLabel,
-  FormControl,
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useEffect, useState } from "react";
@@ -17,16 +14,14 @@ import axios from "axios";
 
 import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { DropdownButton } from "react-bootstrap";
-import { Dropdown } from "bootstrap";
-import { MenuItem } from "@material-ui/core";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 export default function Register() {
   let [name, setName] = useState("");
   let [surname, setSurname] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [role, setRole] = useState("");
+  let [role, setRole] = useState(null);
   let [nameErr, setNameErr] = useState(false);
   let [emailErr, setEmailErr] = useState(false);
   let [passErr, setPassErr] = useState(false);
@@ -36,13 +31,9 @@ export default function Register() {
   const special = "[!@#$%^&*]";
   let user = sessionStorage.getItem("user");
   let navigate = useNavigate();
-  let localstorage = localStorage.getItem("user");
   useEffect(() => {
     console.log(user);
-    if (localstorage !== "null" && localstorage !== null) {
-      user = sessionStorage.setItem("user", localstorage);
-    }
-    if (user !== "null" && user !== null) {
+    if (user !== "null" && user !== null && user != undefined) {
       user = JSON.parse(sessionStorage.getItem("user"));
       if (user.role == "admin") {
         navigate("/Admin");
@@ -76,7 +67,7 @@ export default function Register() {
   const roleHandler = (e) => {
     console.log(e);
 
-    setRole(e.target.value);
+    setRole(e);
   };
 
   function clearField() {
@@ -123,7 +114,7 @@ export default function Register() {
       toast.error("Please enter valid email address");
       return;
     }
-    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
+    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     if (!password.match(passw)) {
       toast.error(
         "password must contain special character and should be between 7-14 characters"
@@ -166,17 +157,16 @@ export default function Register() {
             height="65"
             width="45"
           />
-          <span
-            className="multicolortext fw-bolder ml-3"
-            style={{ fontSize: "35px" }}
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
           >
             CDAC Portal
-          </span>
-          <img
-            height="100"
-            width="100"
-            src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
-          />
+          </Typography>
+
           {/* <Avatar
               
               
@@ -192,20 +182,15 @@ export default function Register() {
             </Avatar>
             <h3 style={{ color: "#1bbd7e" }}> Sign Up </h3>
           </Grid>
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Role</InputLabel>
-            <Select
-              width="400px"
-              labelId="demo-simple-select-label"
-              className="text-dark"
-              id="dropdown-variants-Info"
-              title="Role"
-              onSelect={roleHandler}
-            >
-              <MenuItem eventKey="faculty">Faculty</MenuItem>
-              <MenuItem eventKey="student">Student</MenuItem>
-            </Select>
-          </FormControl>
+          <DropdownButton
+            className="text-dark"
+            id="dropdown-variants-Info"
+            title="Role"
+            onSelect={roleHandler}
+          >
+            <Dropdown.Item eventKey="faculty">Faculty</Dropdown.Item>
+            <Dropdown.Item eventKey="student">Student</Dropdown.Item>
+          </DropdownButton>
           <TextField
             id="name"
             label="Name"
