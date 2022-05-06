@@ -125,7 +125,7 @@ export default function Register() {
       toast.error("Must select a role");
       return;
     }
-    resp = await axios.post("http://localhost:8080/register", {
+    resp = await axios.post("https://cdacportal.herokuapp.com/register", {
       name: name,
       password: password,
       surname: surname,
