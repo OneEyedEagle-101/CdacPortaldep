@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/CdacPortaldep/static/css/main.8d2faa5f.css",
-    "main.js": "/CdacPortaldep/static/js/main.7f566cd5.js",
+    "main.js": "/CdacPortaldep/static/js/main.c7e759fc.js",
     "index.html": "/CdacPortaldep/index.html",
     "main.8d2faa5f.css.map": "/CdacPortaldep/static/css/main.8d2faa5f.css.map",
-    "main.7f566cd5.js.map": "/CdacPortaldep/static/js/main.7f566cd5.js.map"
+    "main.c7e759fc.js.map": "/CdacPortaldep/static/js/main.c7e759fc.js.map"
   },
   "entrypoints": [
     "static/css/main.8d2faa5f.css",
-    "static/js/main.7f566cd5.js"
+    "static/js/main.c7e759fc.js"
   ]
 }
