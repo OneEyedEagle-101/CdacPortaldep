@@ -43,7 +43,7 @@ export default function Register() {
         navigate("/faculty");
       }
     }
-  });
+  }, []);
 
   const usernameHandler = (e) => {
     name = e.target.value;
@@ -90,13 +90,12 @@ export default function Register() {
   };
 
   async function register() {
-    if (
-      name.match(digit) ||
-      name.length <= 3 ||
-      name.match(special) ||
-      name.length > 15 ||
-      name == ""
-    ) {
+    if (name.length <= 3 || name.length > 15 || name == "") {
+      toast.error("Name length should be 3 to 15 characters");
+      return;
+    }
+
+    if (name.match(digit) || name.match(special)) {
       toast.error("Name should not contain any Special characters");
       return;
     }
@@ -157,17 +156,17 @@ export default function Register() {
             height="65"
             width="45"
           />
-            <span
-              className="multicolortext fw-bolder ml-3"
-              style={{ fontSize: "35px" }}
-            >
-              CDAC Portal
-            </span>
-            <img
-              height="100"
-              width="100"
-              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
-            />
+          <span
+            className="multicolortext fw-bolder ml-3"
+            style={{ fontSize: "35px" }}
+          >
+            CDAC Portal
+          </span>
+          <img
+            height="100"
+            width="100"
+            src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+          />
 
           {/* <Avatar
               
@@ -175,7 +174,6 @@ export default function Register() {
             /> */}
         </Toolbar>
       </AppBar>
-
 
       <Grid style={{ marginTop: "100px" }}>
         <Paper elevation={10} style={paperStyle}>

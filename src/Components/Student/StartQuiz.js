@@ -29,6 +29,7 @@ export default function StartQuiz() {
   const lengthofquiz = quiz.queList.length;
 
   const location = useLocation();
+  
   useEffect(() => {
     if (user === "null" || user === null) {
       toast.error("Login First!!");
