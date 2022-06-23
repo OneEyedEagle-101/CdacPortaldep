@@ -10,7 +10,7 @@ export default function FacultyList() {
 
   useEffect(async () => {
     let response = await axios.get(
-      "http://localhost:8080/Admin/getFacultyList"
+      "https://cdacportal.herokuapp.com/Admin/getFacultyList"
     );
     list = response.data;
     // console.log(list);
@@ -20,11 +20,15 @@ export default function FacultyList() {
   const disableAcc = async (e) => {
     let id = e.target.value;
 
-    await axios.post("http://localhost:8080/Admin/disableAcc", null, {
-      params: { id },
-    });
+    await axios.post(
+      "https://cdacportal.herokuapp.com/Admin/disableAcc",
+      null,
+      {
+        params: { id },
+      }
+    );
     let response = await axios.get(
-      "http://localhost:8080/Admin/getFacultyList"
+      "https://cdacportal.herokuapp.com/Admin/getFacultyList"
     );
     list = response.data;
     setList(list);
@@ -32,11 +36,11 @@ export default function FacultyList() {
 
   const enableAcc = async (e) => {
     let id = e.target.value;
-    await axios.post("http://localhost:8080/Admin/enableAcc", null, {
+    await axios.post("https://cdacportal.herokuapp.com/Admin/enableAcc", null, {
       params: { id },
     });
     let response = await axios.get(
-      "http://localhost:8080/Admin/getFacultyList"
+      "https://cdacportal.herokuapp.com/Admin/getFacultyList"
     );
     list = response.data;
     setList(list);
@@ -51,7 +55,9 @@ export default function FacultyList() {
   return (
     <>
       <Grid align="center">
-        <div className="display-6 fw-bolder text-center">Manage Faculty Accounts</div>
+        <div className="display-6 fw-bolder text-center">
+          Manage Faculty Accounts
+        </div>
         <Paper
           elevation={10}
           style={{ width: "700px", marginTop: "40px", height: height }}

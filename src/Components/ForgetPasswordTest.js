@@ -4,7 +4,6 @@ import toast, { Toaster, ToastIcon } from "react-hot-toast";
 import { Button, Container, TextField } from "@mui/material";
 import { Row } from "react-bootstrap";
 
-
 export default function ForgetPassword() {
   let [email, setUsername] = useState("");
   let [password, setPassword] = useState("");
@@ -25,9 +24,13 @@ export default function ForgetPassword() {
   };
 
   const verifyOtp = async () => {
-  const response = await axios.post("http://localhost:8080/verifyOtp", null, {
-      params: { otp: Otp },
-    });
+    const response = await axios.post(
+      "https://cdacportal.herokuapp.com/verifyOtp",
+      null,
+      {
+        params: { otp: Otp },
+      }
+    );
     if (response.data == true) {
       return (
         <>
@@ -48,7 +51,7 @@ export default function ForgetPassword() {
   };
   const sendOtp = async () => {
     const response = await axios.post(
-      "http://localhost:8080/ForgetPasswordGenerateOtp",
+      "https://cdacportal.herokuapp.com/ForgetPasswordGenerateOtp",
       null,
       {
         params: { email: email },
@@ -76,7 +79,6 @@ export default function ForgetPassword() {
 
   return (
     <>
-    
       <Container>
         <TextField
           id="email"

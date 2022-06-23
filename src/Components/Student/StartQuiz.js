@@ -29,7 +29,7 @@ export default function StartQuiz() {
   const lengthofquiz = quiz.queList.length;
 
   const location = useLocation();
-  
+
   useEffect(() => {
     if (user === "null" || user === null) {
       toast.error("Login First!!");
@@ -57,7 +57,7 @@ export default function StartQuiz() {
       sessionStorage.setItem("score", score);
       score = 0;
       setScore(score);
-      
+
       sessionStorage.setItem("lengthofquiz", lengthofquiz);
       navigate("/Student/Congratulations");
       return;
@@ -76,13 +76,17 @@ export default function StartQuiz() {
   const updateDB = async () => {
     let userid = user.portalId;
 
-    await axios.post("http://localhost:8080/Student/AddScore", null, {
-      params: {
-        userid,
-        quizid,
-        score,
-      },
-    });
+    await axios.post(
+      "https://cdacportal.herokuapp.com/Student/AddScore",
+      null,
+      {
+        params: {
+          userid,
+          quizid,
+          score,
+        },
+      }
+    );
   };
 
   const scoreCounter = () => {

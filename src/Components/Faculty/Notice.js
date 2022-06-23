@@ -27,7 +27,7 @@ export default function Notice() {
     setDis(true);
     let subject = document.getElementById("subject").value;
     let notice = document.getElementById("notice").value;
-    await axios.post("http://localhost:8080/Faculty/Notices", null, {
+    await axios.post("https://cdacportal.herokuapp.com/Faculty/Notices", null, {
       params: { id, subject, notice },
     });
 
@@ -38,9 +38,13 @@ export default function Notice() {
     setDis(true);
     let subject = document.getElementById("subject").value;
     let notice = document.getElementById("notice").value;
-    await axios.post("http://localhost:8080/Faculty/PrioNotices", null, {
-      params: { id, subject, notice },
-    });
+    await axios.post(
+      "https://cdacportal.herokuapp.com/Faculty/PrioNotices",
+      null,
+      {
+        params: { id, subject, notice },
+      }
+    );
 
     toast.success("Notice Broadcasted 👍");
   };

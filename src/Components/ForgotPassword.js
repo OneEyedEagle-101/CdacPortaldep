@@ -50,7 +50,7 @@ export default function ForgotPassword() {
       return;
     }
     let resp = await axios.post(
-      "http://localhost:8080/ForgetPasswordGenerateOtp",
+      "https://cdacportal.herokuapp.com/ForgetPasswordGenerateOtp",
       null,
       {
         params: {
@@ -74,12 +74,16 @@ export default function ForgotPassword() {
 
   const verifyOtp = async () => {
     let otp = document.getElementById("otp").value;
-    let resp = await axios.post("http://localhost:8080/verifyOtp", null, {
-      params: {
-        email,
-        otp,
-      },
-    });
+    let resp = await axios.post(
+      "https://cdacportal.herokuapp.com/verifyOtp",
+      null,
+      {
+        params: {
+          email,
+          otp,
+        },
+      }
+    );
     if (resp.data) {
       toast.success("Otp Verified Successfully");
       setotpdis(true);
@@ -93,9 +97,13 @@ export default function ForgotPassword() {
     let newPassword = document.getElementById("newPassword").value;
     email = document.getElementById("email").value;
 
-    let resp = await axios.post("http://localhost:8080/updatePassword", null, {
-      params: { newPassword, email },
-    });
+    let resp = await axios.post(
+      "https://cdacportal.herokuapp.com/updatePassword",
+      null,
+      {
+        params: { newPassword, email },
+      }
+    );
     if (resp.data) {
       toast.success("Password updated successfully, Please relogin");
       navigate("/");

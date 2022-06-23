@@ -40,7 +40,7 @@ export default function FacultyRecording() {
     // formData.append("recordingLink", recordingLink);
     // formData.append("topicName", topicName);
 
-    await axios.post("http://localhost:8080/Faculty/AddRec", {
+    await axios.post("https://cdacportal.herokuapp.com/Faculty/AddRec", {
       body: {
         moduleName,
         recordingLink,

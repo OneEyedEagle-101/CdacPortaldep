@@ -70,16 +70,19 @@ export default function AddQuestion() {
     }
     options[checkedbtn - 1] = true;
     question = document.getElementById("AddQuestion").value;
-    let resp = await axios.post("http://localhost:8080/Faculty/AddQuestion", {
-      subject,
-      question,
-      optionlist: [
-        { optionString: option[0], correct: options[0] },
-        { optionString: option[1], correct: options[1] },
-        { optionString: option[2], correct: options[2] },
-        { optionString: option[3], correct: options[3] },
-      ],
-    });
+    let resp = await axios.post(
+      "https://cdacportal.herokuapp.com/Faculty/AddQuestion",
+      {
+        subject,
+        question,
+        optionlist: [
+          { optionString: option[0], correct: options[0] },
+          { optionString: option[1], correct: options[1] },
+          { optionString: option[2], correct: options[2] },
+          { optionString: option[3], correct: options[3] },
+        ],
+      }
+    );
     toast.success("Quiz Added Successfully !!");
     sessionStorage.setItem("subject", null);
     navigate("/Faculty");
@@ -131,16 +134,19 @@ export default function AddQuestion() {
     }
     options[checkedbtn - 1] = true;
     question = document.getElementById("AddQuestion").value;
-    let resp = await axios.post("http://localhost:8080/Faculty/AddQuestion", {
-      subject,
-      question,
-      optionlist: [
-        { optionString: option[0], correct: options[0] },
-        { optionString: option[1], correct: options[1] },
-        { optionString: option[2], correct: options[2] },
-        { optionString: option[3], correct: options[3] },
-      ],
-    });
+    let resp = await axios.post(
+      "https://cdacportal.herokuapp.com/Faculty/AddQuestion",
+      {
+        subject,
+        question,
+        optionlist: [
+          { optionString: option[0], correct: options[0] },
+          { optionString: option[1], correct: options[1] },
+          { optionString: option[2], correct: options[2] },
+          { optionString: option[3], correct: options[3] },
+        ],
+      }
+    );
     toast.success("Question Added");
     document.getElementById("resbtn").click();
   };

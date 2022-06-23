@@ -32,7 +32,9 @@ export default function RecordingsList() {
   let [vidId, setVidId] = React.useState("");
 
   React.useEffect(async () => {
-    let response = await axios.get("http://localhost:8080/Student/VideoList");
+    let response = await axios.get(
+      "https://cdacportal.herokuapp.com/Student/VideoList"
+    );
     setRecordList(response.data);
     console.log(response.data);
   }, []);
@@ -44,7 +46,13 @@ export default function RecordingsList() {
       </div>
       <Grid container spacing={4} justifyContent="center">
         <Grid item>
-          <Table striped bordered hover style={{ width: "500px" }} align="center">
+          <Table
+            striped
+            bordered
+            hover
+            style={{ width: "500px" }}
+            align="center"
+          >
             <thead>
               <tr>
                 <th>Subject</th>
@@ -76,7 +84,7 @@ export default function RecordingsList() {
                       <Box sx={style}>
                         <video
                           src={
-                            `http://localhost:8080/Student/videoView?id=` +
+                            `https://cdacportal.herokuapp.com/Student/videoView?id=` +
                             vidId
                           }
                           controls
@@ -95,7 +103,7 @@ export default function RecordingsList() {
               <div >
                 <video
                   src={
-                    `http://localhost:8080/Student/videoView?id=` +
+                    `https://cdacportal.herokuapp.com/Student/videoView?id=` +
                     item.objectId
                   }
                   controls

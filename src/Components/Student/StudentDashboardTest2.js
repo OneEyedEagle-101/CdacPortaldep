@@ -165,7 +165,7 @@ export default function StudentDashboard() {
             <DispChart />
             <Avatar
               alt={user.name}
-              src={"http://localhost:8080/getpropic?id=" + id}
+              src={"https://cdacportal.herokuapp.com/getpropic?id=" + id}
               sx={{ width: 56, height: 56 }}
             />
           </Box>

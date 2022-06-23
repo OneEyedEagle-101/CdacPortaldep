@@ -15,7 +15,7 @@ export default function NoticeBoard() {
   }
   useEffect(async () => {
     let resp = await axios.get(
-      "http://localhost:8080/Student/getNotice?" + global.Date.now()
+      "https://cdacportal.herokuapp.com/Student/getNotice?" + global.Date.now()
     );
     rows = resp.data;
     console.log(rows);

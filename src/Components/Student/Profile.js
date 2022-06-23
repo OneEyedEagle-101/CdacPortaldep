@@ -25,13 +25,13 @@ export default function Profile() {
     id = user.portalId;
   }
   //   if (
-  //     "http://localhost:8080/getpropic?id=" + id == "" ||
-  //     "http://localhost:8080/getpropic?id=" + id == null ||
-  //     "http://localhost:8080/getpropic?id=" + id == undefined
+  //     "https://cdacportal.herokuapp.com/getpropic?id=" + id == "" ||
+  //     "https://cdacportal.herokuapp.com/getpropic?id=" + id == null ||
+  //     "https://cdacportal.herokuapp.com/getpropic?id=" + id == undefined
   //   ) {
   //     setimg("https://i.ibb.co/bPzHL31/download.png");
   //   } else {
-  //     setimg("http://localhost:8080/getpropic?id=" + id);
+  //     setimg("https://cdacportal.herokuapp.com/getpropic?id=" + id);
   //   }
 
   let name = user.name;
@@ -54,7 +54,7 @@ export default function Profile() {
     formData.append("profilePic", selectedFile);
     formData.append("id", id);
 
-    await axios.post("http://localhost:8080/imageUpload", formData, {
+    await axios.post("https://cdacportal.herokuapp.com/imageUpload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -75,7 +75,7 @@ export default function Profile() {
             className="pt-2"
             style={{ width: "100px", height: "100px", marginTop: "10px" }}
             src={
-              "http://localhost:8080/getpropic?id=" +
+              "https://cdacportal.herokuapp.com/getpropic?id=" +
               id +
               "&" +
               global.Date.now()

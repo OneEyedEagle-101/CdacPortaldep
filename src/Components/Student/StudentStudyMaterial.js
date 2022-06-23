@@ -15,14 +15,16 @@ export default function StudentStudyMaterial() {
     setHeight(height);
   };
   useEffect(async () => {
-    let resp = await axios.get("http://localhost:8080/Student/StudyList");
+    let resp = await axios.get(
+      "https://cdacportal.herokuapp.com/Student/StudyList"
+    );
     rows = resp.data;
     setRows(rows);
   }, []);
 
   const downloadFile = (e) => {
     let id = e.target.value;
-    window.open("http://localhost:8080/Student/notes.pdf?id=" + id);
+    window.open("https://cdacportal.herokuapp.com/Student/notes.pdf?id=" + id);
   };
   return (
     <>

@@ -35,7 +35,7 @@ export default function RecordingsUpload() {
     formdata.append("videodetails", file);
 
     let resp = await axios.post(
-      "http://localhost:8080/Faculty/AddRec",
+      "https://cdacportal.herokuapp.com/Faculty/AddRec",
       formdata,
       {
         params: {

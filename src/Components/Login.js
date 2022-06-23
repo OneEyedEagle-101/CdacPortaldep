@@ -54,7 +54,7 @@ export default function Login() {
   }, []);
 
   async function authenticate() {
-    resp = await axios.post("http://localhost:8080/login", null, {
+    resp = await axios.post("https://cdacportal.herokuapp.com/login", null, {
       params: {
         email,
         password,
@@ -115,17 +115,17 @@ export default function Login() {
             height="65"
             width="45"
           />
-            <span
-              className="multicolortext fw-bolder ml-3"
-              style={{ fontSize: "35px" }}
-            >
-              CDAC Portal
-            </span>
-            <img
-              height="100"
-              width="100"
-              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
-            />
+          <span
+            className="multicolortext fw-bolder ml-3"
+            style={{ fontSize: "35px" }}
+          >
+            CDAC Portal
+          </span>
+          <img
+            height="100"
+            width="100"
+            src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+          />
 
           {/* <Avatar
               

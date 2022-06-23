@@ -35,10 +35,7 @@ export default function ProfileCard(props) {
         >
           <Avatar
             alt="Admin"
-            src={
-              "http://localhost:8080 "
-              
-            }
+            src={"https://cdacportal.herokuapp.com "}
             sx={{ width: 75, height: 75 }}
           />
           <h5

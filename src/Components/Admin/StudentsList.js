@@ -8,7 +8,7 @@ export default function StudentsList() {
 
   useEffect(async () => {
     let response = await axios.get(
-      "http://localhost:8080/Admin/getStudentList"
+      "https://cdacportal.herokuapp.com/Admin/getStudentList"
     );
     list = response.data;
     console.log(list);
@@ -25,11 +25,15 @@ export default function StudentsList() {
   const disableAcc = async (e) => {
     let id = e.target.value;
 
-    await axios.post("http://localhost:8080/Admin/disableAcc", null, {
-      params: { id },
-    });
+    await axios.post(
+      "https://cdacportal.herokuapp.com/Admin/disableAcc",
+      null,
+      {
+        params: { id },
+      }
+    );
     let response = await axios.get(
-      "http://localhost:8080/Admin/getStudentList"
+      "https://cdacportal.herokuapp.com/Admin/getStudentList"
     );
     list = response.data;
     setList(list);
@@ -37,11 +41,11 @@ export default function StudentsList() {
 
   const enableAcc = async (e) => {
     let id = e.target.value;
-    await axios.post("http://localhost:8080/Admin/enableAcc", null, {
+    await axios.post("https://cdacportal.herokuapp.com/Admin/enableAcc", null, {
       params: { id },
     });
     let response = await axios.get(
-      "http://localhost:8080/Admin/getStudentList"
+      "https://cdacportal.herokuapp.com/Admin/getStudentList"
     );
     list = response.data;
     setList(list);

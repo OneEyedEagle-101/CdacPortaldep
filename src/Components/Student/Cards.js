@@ -10,7 +10,7 @@ export default function Cards() {
   let navigate = useNavigate();
   useEffect(async () => {
     const resp = await axios.get(
-      "http://localhost:8080/Student/DisplaySubjects"
+      "https://cdacportal.herokuapp.com/Student/DisplaySubjects"
     );
 
     subList = resp.data;
@@ -20,7 +20,8 @@ export default function Cards() {
     {
       console.log(e.target.value);
       let questionList = await axios.get(
-        "http://localhost:8080/Student/getQuestionList?id=" + e.target.value
+        "https://cdacportal.herokuapp.com/Student/getQuestionList?id=" +
+          e.target.value
       );
       let questionList1 = questionList.data;
       console.log(questionList1);

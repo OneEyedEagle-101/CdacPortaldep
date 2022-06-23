@@ -12,7 +12,7 @@ export default function ApexPieChart(props) {
 
   React.useEffect(async () => {
     const resp1 = await axios.get(
-      "http://localhost:8080/Faculty/dashboard?portalId=" + props.id
+      "https://cdacportal.herokuapp.com/Faculty/dashboard?portalId=" + props.id
     );
     countQuiz = resp1.data.countQuiz;
     setCountQuiz(countQuiz);

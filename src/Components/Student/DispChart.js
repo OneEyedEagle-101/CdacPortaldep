@@ -26,7 +26,7 @@ export default function DispChart() {
     param = user.portalId;
 
     let resp = await axios.get(
-      `http://localhost:8080/Student/getScore?id=${param}`
+      `https://cdacportal.herokuapp.com/Student/getScore?id=${param}`
       //
     );
     response = resp.data;

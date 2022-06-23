@@ -19,7 +19,7 @@ export default function Checkrecordings() {
       </button>
       <video
         src={
-          `http://localhost:8080/Student/${path}?id=` +
+          `https://cdacportal.herokuapp.com/Student/${path}?id=` +
           id +
           "&" +
           global.Date.now()

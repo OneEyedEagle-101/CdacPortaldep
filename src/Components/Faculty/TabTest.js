@@ -37,11 +37,15 @@ export default function NewTabTest() {
   const deleteMaterial = async (e) => {
     console.log(e.target.value);
     let baseId = e.target.value;
-    await axios.post("http://localhost:8080/Faculty/deleteMaterial", null, {
-      params: { baseId },
-    });
+    await axios.post(
+      "https://cdacportal.herokuapp.com/Faculty/deleteMaterial",
+      null,
+      {
+        params: { baseId },
+      }
+    );
     let response = await axios.get(
-      "http://localhost:8080/Faculty/getStudyMaterial"
+      "https://cdacportal.herokuapp.com/Faculty/getStudyMaterial"
     );
     rows = response.data;
     console.log(rows);
@@ -49,7 +53,7 @@ export default function NewTabTest() {
   };
   React.useEffect(async () => {
     let response = await axios.get(
-      "http://localhost:8080/Faculty/getStudyMaterial"
+      "https://cdacportal.herokuapp.com/Faculty/getStudyMaterial"
     );
     rows = response.data;
     console.log(rows);
@@ -73,7 +77,7 @@ export default function NewTabTest() {
     formdata.append("file", file);
 
     let resp = await axios.post(
-      "http://localhost:8080/Faculty/addStudyMaterial",
+      "https://cdacportal.herokuapp.com/Faculty/addStudyMaterial",
       formdata,
       {
         params: {
@@ -87,7 +91,7 @@ export default function NewTabTest() {
       }
     );
     let response = await axios.get(
-      "http://localhost:8080/Faculty/getStudyMaterial"
+      "https://cdacportal.herokuapp.com/Faculty/getStudyMaterial"
     );
     rows = response.data;
     console.log(rows);

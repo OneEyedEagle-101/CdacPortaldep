@@ -10,7 +10,9 @@ export default function ActivityChart(props) {
   let [countFaculty, setCountFaculty] = React.useState(0);
 
   React.useEffect(async () => {
-    const resp1 = await axios.get("http://localhost:8080/Admin/getDashdetails");
+    const resp1 = await axios.get(
+      "https://cdacportal.herokuapp.com/Admin/getDashdetails"
+    );
     countStudent = resp1.data.countstudent;
     setCountStudent(countStudent);
     countNote = resp1.data.countstudymatrial;

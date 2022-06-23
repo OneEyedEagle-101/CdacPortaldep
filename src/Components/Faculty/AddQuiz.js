@@ -36,7 +36,7 @@ export default function AddQuiz() {
   };
   async function createQuiz() {
     let resp = await axios.post(
-      "http://localhost:8080/Faculty/CreateQuiz",
+      "https://cdacportal.herokuapp.com/Faculty/CreateQuiz",
       null,
       {
         params: { sub, email },

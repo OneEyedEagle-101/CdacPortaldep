@@ -117,7 +117,7 @@ function DashboardContent() {
       navigate("/");
     }
     const resp1 = await axios.get(
-      "http://localhost:8080/Faculty/dashboard?portalId=" +
+      "https://cdacportal.herokuapp.com/Faculty/dashboard?portalId=" +
         JSON.parse(sessionStorage.getItem("user")).portalId
     );
     const dashcontent = resp1.data;
@@ -169,17 +169,17 @@ function DashboardContent() {
                 height="65"
                 width="45"
               />
-                <span
-              className="multicolortext fw-bolder ml-3"
-              style={{ fontSize: "35px" }}
-            >
-              CDAC Portal
-            </span>
-            <img
-              height="100"
-              width="100"
-              src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
-            />
+              <span
+                className="multicolortext fw-bolder ml-3"
+                style={{ fontSize: "35px" }}
+              >
+                CDAC Portal
+              </span>
+              <img
+                height="100"
+                width="100"
+                src="https://i.ibb.co/cFypkmN/Daco-4066845.png"
+              />
             </Toolbar>
           </AppBar>
 

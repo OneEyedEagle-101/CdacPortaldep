@@ -36,7 +36,7 @@ export default function ProfileCard(props) {
           <Avatar
             alt={student}
             src={
-              "http://localhost:8080/getpropic?id=" +
+              "https://cdacportal.herokuapp.com/getpropic?id=" +
               props.idus +
               "&" +
               global.Date.now()
